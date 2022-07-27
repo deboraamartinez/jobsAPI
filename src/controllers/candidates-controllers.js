@@ -33,9 +33,9 @@ const CandidatesController = {
         return res.status(404).json({ message: 'Candidate not found' })
       }
       return res.status(200).json(candidate)
-    } catch (error) {
+    } catch (err) {
       if (err instanceof Error) {
-        return res.status(400).json({ message: `No` })
+        return res.status(400).json({ message: err.message })
       }
     }
   },
@@ -46,9 +46,9 @@ const CandidatesController = {
     try {
       await database.Candidates.update(newInfo, { where: { id: Number(id) } })
       const updatedCandidate = await database.Candidates.findOne({ where: { id: Number(id) } })
-      return res.status(200).json(updatedCandidate)
+      return res.status(204).json(updatedCandidate)
 
-    } catch (error) {
+    } catch (err) {
       if (err instanceof Error) {
         return res.status(400).json({ message: err.message })
       }
@@ -58,7 +58,7 @@ const CandidatesController = {
     const { id } = req.params
     try {
       await database.Candidates.destroy({ where: { id: Number(id) } })
-      return res.status(200).json({ message: `Candidate ${id} successfully deleted` })
+      return res.status(204).json({ message: `Candidate ${id} successfully deleted` })
     } catch (error) {
 
     }
