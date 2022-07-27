@@ -1,13 +1,12 @@
 const express = require('express')
-var app = express()
+const routes = require('./routes')
 
-const router = express.Router()
-
-
-
-
-router.get('/', (req, res) => res.
-  json({ message: `Hello World!` }))
-app.use(router)
+const app = express()
 const port = 3000
+app.use(express.json())
+app.use(routes)
+
+
 app.listen(port, () => console.log(`The Server is running on ${port}`))
+
+module.exports = app
