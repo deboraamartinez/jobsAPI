@@ -64,6 +64,18 @@ const CompaniesControllers = {
         return res.status(400).json({ message: err.message })
       }
     }
+  },
+
+  jobsByCompany: async (req, res) => {
+    const { id } = req.params
+    try {
+      const company = await database.Jobs.findAll({ where: { companyId: Number(id) } })
+      return res.json(company)
+    } catch (err) {
+      if (err instanceof Error) {
+        return res.status(400).json({ message: err.message })
+      }
+    }
   }
 }
 
