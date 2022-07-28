@@ -12,7 +12,6 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
 
       Jobs.belongsTo(models.Companies, {
-        as: 'companies',
         foreignKey: 'companyId',
       })
     }
